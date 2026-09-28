@@ -1,0 +1,184 @@
+# ==============================================================================
+# Environment Variables & Secrets
+# ==============================================================================
+.env
+.env*.local
+.env.production
+.env.staging
+*.key
+*.pem
+*.cert
+*.crt
+
+# Keep example environment configuration tracked
+!.env.example
+
+# ==============================================================================
+# Python & Caching
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# ==============================================================================
+# Virtual Environments
+# ==============================================================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==============================================================================
+# Node.js & Frontend Build Outputs
+# ==============================================================================
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+out/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================================================
+# Databases & Local State
+# ==============================================================================
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+ibvap.db
+
+# ==============================================================================
+# AI / ML Model Weights & Checkpoints
+# ==============================================================================
+*.pt
+*.pth
+*.onnx
+*.weights
+*.bin
+*.h5
+*.hdf5
+*.tflite
+*.safetensors
+yolov8n.pt
+
+# ==============================================================================
+# Video & Media Files
+# ==============================================================================
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.flv
+*.wmv
+*.webm
+*.m4v
+
+# ==============================================================================
+# Generated Storage & Evidence
+# ==============================================================================
+storage/evidence/*
+!storage/evidence/.gitkeep
+storage/temp/
+storage/logs/
+
+# ==============================================================================
+# General Logs & Temporary Files
+# ==============================================================================
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ==============================================================================
+# IDEs & Code Editors
+# ==============================================================================
+.vscode/
+!.vscode/settings.json.example
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# ==============================================================================
+# Operating System Artifacts
+# ==============================================================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
