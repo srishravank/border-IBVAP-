@@ -1,14 +1,43 @@
 # IBVAP 2.0 — Intelligent Border Video Analytics & Evidence Platform
-**Smart India Hackathon (SIH26187) — Release Candidate 1 (v1.0.0-rc1)**  
-*An Edge-First, Multi-Camera, Explainable AI, Cryptographically Anchored & Privacy-Preserving Border Security Operating System.*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![React 18](https://img.shields.io/badge/react-18.2.0-cyan.svg)](https://reactjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
+[![Tests Passing](https://img.shields.io/badge/tests-135%2F135%20passed-brightgreen.svg)](tests/)
+
+> **Smart India Hackathon (SIH26187)**  
+> *An Edge-First, Multi-Camera, Explainable AI, Cryptographically Anchored & Privacy-Preserving Border Security Operating System.*
 
 ---
 
-## 1. System Overview
+## 📑 Table of Contents
 
-IBVAP 2.0 is a production-grade border security platform designed to detect, track, verify, correlate, assess, manage, prove, and learn from physical security events across heterogeneous camera networks (CCTV, RTSP, Thermal, Night-Vision).
+- [System Overview](#-system-overview)
+- [Key Features](#-key-features)
+- [System Architecture](#-system-architecture)
+- [Directory Structure](#-directory-structure)
+- [Prerequisites](#-prerequisites)
+- [Step-by-Step Quickstart Guide](#-step-by-step-quickstart-guide)
+  - [1. Clone the Repository](#1-clone-the-repository)
+  - [2. Configure Environment Variables](#2-configure-environment-variables)
+  - [3. Backend Setup & Dependencies](#3-backend-setup--dependencies)
+  - [4. Generate Simulated Video Feeds & Models](#4-generate-simulated-video-feeds--models)
+  - [5. Frontend Setup & Dependencies](#5-frontend-setup--dependencies)
+  - [6. Launch the Platform](#6-launch-the-platform)
+- [Running Automated Tests](#-running-automated-tests)
+- [Running the Interactive Demo / Simulation](#-running-the-interactive-demo--simulation)
+- [API & Service Endpoints](#-api--service-endpoints)
+- [Documentation Index](#-documentation-index)
+- [Troubleshooting & FAQs](#-troubleshooting--faqs)
 
-### The Complete 11-Phase Architecture
+---
+
+## 🛡️ System Overview
+
+**IBVAP 2.0** is an edge-first surveillance operating system designed for multi-camera border sectors (CCTV, RTSP, Thermal, Night-Vision). It detects, tracks, verifies, and correlates potential border anomalies with explainable AI reasoning while ensuring chain-of-custody cryptographic evidence trust and federated edge learning.
+
+### The 11-Phase Workflow:
 ```
 SEE          ──>  Phase 1: Multi-Camera Edge CCTV / RTSP / File Video Ingestion & Health
 UNDERSTAND   ──>  Phase 2: YOLOv8 / RT-DETR Detection & ByteTrack Multi-Object Tracking
@@ -20,97 +49,272 @@ PROVE        ──>  Phase 7: Tamper-Evident Evidence Package, SHA-256 & Privat
 RESILIENCE   ──>  Phase 8: Offline-First Edge Operation, Resilient Queue & Idempotent Sync
 LEARN        ──>  Phase 9: Privacy-Preserving On-Device Fine-Tuning & FedAvg Federated Aggregation
 HARDENING    ──>  Phase 10: Full End-to-End Integration, Unified Health & Master Demonstration
-READINESS    ──>  Phase 11: Final Benchmark Validation, Demo Simulation & Jury Readiness (RC1)
+READINESS    ──>  Phase 11: Final Benchmark Validation, Demo Simulation & Jury Readiness
 ```
 
 ---
 
-## 2. Key Capabilities & Architectural Guarantees
+## ✨ Key Features
 
-- **Privacy by Design:** Raw surveillance video and full-resolution images **never leave the edge node**. Only model weight gradients ($\Delta W$), metrics, and SHA-256 hashes are exchanged with central systems.
-- **Zero Black-Box Reasoning:** Every threat score includes a deterministic, explainable factor breakdown with clear separation of sensor **FACT** from analytical **ASSESSMENT**.
-- **Human-in-the-Loop Governance:** AI never executes autonomous operational interventions. Models require multi-stage benchmark validation, supervisor approval, and feature 1-click instant rollback.
-- **Court-Admissible Evidence Trust:** Incident evidence manifests are canonicalized and hashed via SHA-256, then permanently anchored to a private blockchain ledger. Tampering is cryptographically detected in real time.
-- **Offline-First Resilience:** In the event of network disruption, edge AI detection, tracking, verification, risk assessment, and evidence packaging continue locally without data loss.
-- **Deterministic 13-Stage Demo Machine & Jury Mode:** Built-in interactive state machine and one-click Hero Scenario runner for high-reliability live jury evaluation.
-
----
-
-## 3. Technology Stack & Measured Benchmarks
-
-| Layer | Technologies | Measured Average Latency / Rate |
-| :--- | :--- | :--- |
-| **Detection (YOLOv8n)** | PyTorch / TorchScript, CLAHE preprocessor | **46.96 ms** (~21.3 FPS on CPU) |
-| **Tracking (ByteTrack)** | Kalman Filter, Hungarian Re-ID | **0.14 ms** (>7,000 FPS) |
-| **Risk Intelligence** | NetworkX Graph, Multi-Factor Aggregator | **24.58 ms** / incident |
-| **Evidence & SHA-256** | Canonical JSON, Merkle Ledger Anchor | **113.06 ms** (Hash Verif: 43.35 ms) |
-| **Offline Sync Queue** | SQLite WAL, Resilient Backoff Queue | **83.44 ms** flush cycle |
-| **Federated Learning** | FedAvg Protocol, Weight Differential Aggregator | **51.85 ms** / aggregation round |
-| **Backend & API** | Python 3.12, FastAPI, Uvicorn, WebSockets | < 5 ms REST overhead |
-| **Frontend SOC Cockpit** | React 18, TypeScript, Vite, Tailwind CSS | 60 FPS Tactical Dashboard |
-| **Automated Testing** | Pytest (135/135 Tests Passing) | **100% Pass Rate** |
+- 🔒 **Privacy-by-Design:** Raw video footage stays on the edge device. Only model gradients ($\Delta W$), tamper hashes, and aggregated metadata are shared centrally.
+- 🧠 **Explainable Threat Scoring:** Every threat calculation (0–100) breaks down into deterministic sub-factors with full attribution (sensor facts vs. threat deductions).
+- ⛓️ **Cryptographic Chain of Custody:** Evidence manifests are normalized, SHA-256 hashed, and anchored to a local tamper-evident blockchain ledger. Real-time tampering is immediately flagged.
+- 📡 **Offline-First Fault Tolerance:** Operates completely offline during communication dropouts using SQLite WAL queues, auto-reconciling when back online.
+- 🤝 **Human-in-the-Loop AI Governance:** No autonomous lethal actions. Model updates require evaluation gates and one-click rollback.
+- 🕹️ **Built-in 13-Stage Demo Machine:** One-click simulation lab and automated hero scenarios for reliable live demonstrations.
 
 ---
 
-## 4. Quick Start & Setup Guide
+## 🏗️ Directory Structure
 
-### Step 1: Start Backend API
-```bash
-# In the repository root:
-python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```text
+border-IBVAP-/
+├── ai/                     # AI Pipeline (detection, tracking, preprocessing, schemas)
+├── backend/                # FastAPI Application
+│   ├── api/                # REST & WebSocket API Routers (cameras, zones, risk, sync, etc.)
+│   ├── database/           # SQLite / SQLAlchemy Models & Connection
+│   ├── health/             # Camera & Stream Health Monitoring
+│   ├── models/             # Pydantic Schemas & Data Transfer Objects
+│   ├── services/           # Core Domain Services (Risk Engine, Evidence, Sync, Ledger)
+│   └── main.py             # FastAPI Application Entry Point
+├── data/
+│   └── videos/             # Video Streams / Synthetic Test Feeds (.mp4)
+├── docs/                   # Full Technical Documentation, Guides & Checklists
+├── frontend/               # React 18 + Vite + Tailwind CSS SOC Operator Dashboard
+│   ├── src/                # UI Components, Views, State, and API Services
+│   └── package.json        # Frontend Dependencies & Scripts
+├── intelligence/           # Risk Assessment, Graph Models, Cross-Camera Matching
+├── scripts/                # Utility & Simulation Scripts (e.g. Video Generator)
+├── storage/                # Evidence & Audit Artifacts (ignored by git)
+├── tests/                  # Automated Test Suite (135+ tests)
+├── verification/           # Temporal Gating & False Positive Suppression
+├── .env.example            # Sample Environment Configuration
+├── .gitignore              # Repository Git Ignore Rules
+├── requirements.txt        # Python Dependencies
+└── README.md               # Main Project Readme
 ```
-- **Backend API:** `http://localhost:8000`
-- **Interactive Swagger Docs:** `http://localhost:8000/docs`
-- **Unified Health Endpoint:** `http://localhost:8000/api/system/health`
-- **Demo State Machine Status:** `http://localhost:8000/api/demo/status`
 
-### Step 2: Start Frontend SOC Dashboard
+---
+
+## ⚙️ Prerequisites
+
+Before installing, ensure your machine has the following:
+
+- **Python:** `3.10` or higher (3.11/3.12 recommended)
+- **Node.js:** `v18.0.0` or higher & **npm** `v9.0.0` or higher
+- **Git:** Installed and available in your `PATH`
+- **C++ Build Tools / FFmpeg (Optional):** Required only if compiling OpenCV from source or using hardware-accelerated video codecs.
+
+---
+
+## 🚀 Step-by-Step Quickstart Guide
+
+### 1. Clone the Repository
+
 ```bash
-# In a new terminal:
+git clone https://github.com/srishravank/border-IBVAP-.git
+cd border-IBVAP-
+```
+
+### 2. Configure Environment Variables
+
+Copy the provided `.env.example` file to create your `.env` configuration:
+
+**Linux / macOS:**
+```bash
+cp .env.example .env
+```
+
+**Windows (PowerShell):**
+```powershell
+Copy-Item .env.example .env
+```
+
+**Windows (CMD):**
+```cmd
+copy .env.example .env
+```
+
+*(Optional)* Modify `.env` to adjust camera stream ports, database paths, or threshold values as needed.
+
+---
+
+### 3. Backend Setup & Dependencies
+
+It is strongly recommended to use a Python virtual environment:
+
+#### Create & Activate Virtual Environment:
+- **Linux / macOS:**
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
+- **Windows (PowerShell):**
+  ```powershell
+  python -m venv venv
+  .\venv\Scripts\Activate.ps1
+  ```
+- **Windows (CMD):**
+  ```cmd
+  python -m venv venv
+  venv\Scripts\activate.bat
+  ```
+
+#### Install Python Dependencies:
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Generate Simulated Video Feeds & Models
+
+To run the camera pipelines and simulation lab without connecting physical RTSP cameras, generate synthetic multi-sector CCTV feeds:
+
+```bash
+python scripts/generate_sample_videos.py
+```
+> This creates 4 synthetic camera feeds (`camera01.mp4` to `camera04.mp4`) under `data/videos/` simulating gate, perimeter, riverine, and watchtower sectors.
+
+*Note: The YOLOv8 model (`yolov8n.pt`) will automatically download on first run via Ultralytics when the detector initializes.*
+
+---
+
+### 5. Frontend Setup & Dependencies
+
+Open a new terminal window to configure the React SOC operator interface:
+
+```bash
 cd frontend
 npm install
+```
+
+---
+
+### 6. Launch the Platform
+
+#### Terminal 1 — Start the Backend Server:
+```bash
+# From the repository root with virtual environment activated:
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+- **API Server:** `http://localhost:8000`
+- **Interactive Swagger Docs:** `http://localhost:8000/docs`
+- **ReDoc:** `http://localhost:8000/redoc`
+- **System Health Check:** `http://localhost:8000/api/system/health`
+
+#### Terminal 2 — Start the Frontend Dashboard:
+```bash
+cd frontend
 npm run dev
 ```
-- **Operator Command Center:** `http://localhost:5173`
+- **SOC Command Center Dashboard:** `http://localhost:5173`
 
-### Step 3: Run Full Test Suite
+---
+
+## 🧪 Running Automated Tests
+
+IBVAP 2.0 includes a comprehensive test suite with 135+ tests covering AI pipelines, ByteTrack tracking, polygon ray-casting, risk calculation, evidence hashing, blockchain ledgers, and federated learning:
+
 ```bash
+# Run the complete test suite
 pytest -v
+
+# Run with test coverage report
+pytest --cov=backend --cov=intelligence --cov=verification
 ```
-*Executes all 135 automated unit, integration, and end-to-end tests with 100% pass rate.*
 
 ---
 
-## 5. Master Jury Demonstration Flow
+## 🎮 Running the Interactive Demo / Simulation
 
-You can run the interactive 13-stage state machine from the **Simulation Lab** in the frontend, or trigger the automated Hero Scenario runner via REST API:
+You can experience the 13-stage security incident lifecycle through either the Web UI or the REST API:
 
+### Option A: Via Web UI
+1. Navigate to `http://localhost:5173`.
+2. Click on **Simulation Lab** in the navigation bar.
+3. Use the **Hero Scenario** button or step through the 13 interactive stages.
+
+### Option B: Via Terminal / cURL
 ```bash
+# Trigger the complete End-to-End Hero Scenario
 curl -X POST http://localhost:8000/api/demo/hero-scenario
-```
 
-### 13 Interactive Demo Stages:
-1. **1. SEE:** Ingestion active across `CAM-01`, `CAM-02`, `CAM-03`, `CAM-04`.
-2. **2. UNDERSTAND:** Person & vehicle detection with persistent ByteTrack track IDs.
-3. **3. VERIFY:** Restricted zone entry passed through 3-of-5 temporal gate.
-4. **4. SUPPRESS:** Environmental noise and false alarms eliminated (>94% suppression).
-5. **5. CORRELATE:** Cross-camera Re-ID tracks subject traversing `CAM-01` $\to$ `CAM-02` $\to$ `CAM-03`.
-6. **6. ASSESS:** Explainable risk engine generates composite score (85/100) and factor breakdown.
-7. **7. RESPOND:** Command Center alert generated; forward-tracking camera recommendation displayed.
-8. **8. PROVE:** Evidence package compiled, SHA-256 hashed, and anchored to private blockchain ledger (`AUTHENTIC`).
-9. **9. TAMPER:** Simulated tampering immediately triggers red `TAMPER DETECTED: HASH MISMATCH`.
-10. **10. RESTORE:** Consensus recovery restores authentic records (`RESTORED & VALIDATED`).
-11. **11. OFFLINE:** Network loss simulated; AI processing and operator actions queue locally.
-12. **12. SYNC:** Network restored; resumable sync reconciles queued items with zero duplicates.
-13. **13. LEARN:** Validated local samples trigger edge fine-tuning, FedAvg aggregation generates candidate model with 1-click rollback.
+# Check the current stage of the state machine
+curl http://localhost:8000/api/demo/status
+```
 
 ---
 
-## 6. Project Documentation Index
+## 🔌 API & Service Endpoints
 
-- [docs/FINAL_DEMO_GUIDE.md](docs/FINAL_DEMO_GUIDE.md): Complete step-by-step hackathon presentation script.
-- [docs/JURY_EXPLANATION_GUIDE.md](docs/JURY_EXPLANATION_GUIDE.md): Architecture defense & jury Q&A.
-- [docs/performance_report.md](docs/performance_report.md): Measured hardware benchmarks and latency profiles.
-- [docs/DEMO_CHECKLIST.md](docs/DEMO_CHECKLIST.md): Pre-presentation operational verification checklist.
-- [ARCHITECTURE.md](ARCHITECTURE.md): Full layer-by-layer architectural blueprint.
-- [API.md](API.md): Comprehensive REST & WebSocket API specification.
+| Category | Route | Description |
+| :--- | :--- | :--- |
+| **System** | `GET /api/system/health` | Unified health across edge ingestors, DB, and AI pipelines |
+| **Cameras** | `GET /api/cameras` | List all active camera streams and health metrics |
+| **Zones** | `POST /api/zones` | Configure polygon virtual zones & intrusion rules |
+| **Incidents** | `GET /api/incidents` | Query active security incidents and risk levels |
+| **Risk Engine** | `POST /api/risk/assess` | Request real-time explainable risk assessment |
+| **Evidence** | `GET /api/evidence/{id}` | Inspect evidence package manifest & hash proof |
+| **Ledger** | `POST /api/evidence/verify` | Verify evidence integrity against private blockchain |
+| **Learning** | `POST /api/learning/round` | Initiate privacy-preserving federated aggregation |
+| **Simulation** | `POST /api/demo/hero-scenario` | Execute 13-stage live jury demonstration |
+| **WebSocket** | `WS /ws/live` | Real-time multi-camera frame telemetry and alerts |
+
+---
+
+## 📚 Documentation Index
+
+For in-depth explanations, refer to the guides in the repository:
+
+- 📖 [ARCHITECTURE.md](ARCHITECTURE.md) — Comprehensive layer-by-layer architectural blueprint.
+- 📡 [API.md](API.md) — Full REST and WebSocket API specification.
+- 🎯 [docs/FINAL_DEMO_GUIDE.md](docs/FINAL_DEMO_GUIDE.md) — Step-by-step hackathon presentation script.
+- ⚖️ [docs/JURY_EXPLANATION_GUIDE.md](docs/JURY_EXPLANATION_GUIDE.md) — Architectural defense & technical Q&A.
+- 📊 [docs/performance_report.md](docs/performance_report.md) — Hardware performance and latency profiles.
+- 🛠️ [docs/DEMO_CHECKLIST.md](docs/DEMO_CHECKLIST.md) — Pre-presentation operational verification checklist.
+- 🚀 [DEPLOYMENT.md](DEPLOYMENT.md) — Production edge deployment and containerization guide.
+- 🔧 [TROUBLESHOOTING.md](TROUBLESHOOTING.md) — Diagnostics and common resolution steps.
+
+---
+
+## ❓ Troubleshooting & FAQs
+
+<details>
+<summary><b>1. ModuleNotFoundError: No module named 'backend' / 'intelligence'</b></summary>
+Ensure you are running commands from the <b>root directory</b> of the repository and that your virtual environment is active. You can also run:
+```bash
+# On Linux/macOS:
+export PYTHONPATH=.
+# On Windows PowerShell:
+$env:PYTHONPATH="."
+```
+</details>
+
+<details>
+<summary><b>2. OpenCV video read error or missing data/videos/ files</b></summary>
+Run the synthetic video generator script:
+```bash
+python scripts/generate_sample_videos.py
+```
+This generates standard MP4 sample video files for all 4 camera channels.
+</details>
+
+<details>
+<summary><b>3. Port 8000 or 5173 already in use</b></summary>
+- Backend port can be changed in `.env` or via CLI: `python -m uvicorn backend.main:app --port 8080 --reload`
+- Frontend port can be specified with: `npm run dev -- --port 3000`
+</details>
+
+<details>
+<summary><b>4. How to connect physical RTSP / USB Webcam streams?</b></summary>
+Use the <b>Add Camera Modal</b> in the frontend or post to `/api/cameras` with `source_type: "rtsp"` and the RTSP URL (e.g., `rtsp://user:pass@192.168.1.50:554/stream1`), or `source_type: "webcam"` with camera index `0`.
+</details>
+
+---
+
+## 👥 Contributors
+
+- **Team Smart India Hackathon (SIH26187)**
+- Repository: [srishravank/border-IBVAP-](https://github.com/srishravank/border-IBVAP-)
